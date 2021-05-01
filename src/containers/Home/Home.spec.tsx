@@ -96,10 +96,10 @@ describe('<HomeContainer />', () => {
     fireEvent.click(cardElement);
   });
 
-  it('click delete item ', () => {
-    const { getAllByTestId } = render(<Home />);
+  // it('click delete item ', () => {
+  //   const { getAllByTestId } = render(<Home />);
 
-    const buttonElement = getAllByTestId('button-delete');
-    fireEvent.click(buttonElement[0]);
-  });
+  //   const buttonElement = getAllByTestId('button-delete');
+  //   fireEvent.click(buttonElement[0]);
+  // });
 });

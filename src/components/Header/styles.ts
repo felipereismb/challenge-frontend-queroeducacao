@@ -25,7 +25,7 @@ export const HeaderContainer = styled.div`
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
 
   img {
-    height: 70%;
+    height: 50px;
   }
 
   @media (max-width: ${sizes.mobile}) {
@@ -39,8 +39,24 @@ export const Info = styled.div`
   width: 550px;
   column-gap: 10px;
 
-  @media (max-width: ${sizes.mobile}) {
+  @media (max-width: ${sizes.ipad}) {
+    display: none;
+  }
+`;
+
+export const InfoMobile = styled.div`
+  display: none;
+  column-gap: 10px;
+
+  div {
+    display: flex;
+    align-items: center;
     flex-direction: column;
+    column-gap: 10px;
+  }
+
+  @media (max-width: ${sizes.ipad}) {
+    display: flex;
   }
 `;
 
@@ -52,7 +68,24 @@ export const Account = styled.div`
   width: 550px;
   column-gap: 10px;
 
-  @media (max-width: ${sizes.mobile}) {
+  @media (max-width: ${sizes.ipad}) {
+    display: none;
+  }
+`;
+
+export const AccountMobile = styled.div`
+  display: none;
+  justify-content: flex-end;
+  column-gap: 10px;
+
+  div {
+    display: flex;
+    align-items: center;
     flex-direction: column;
+    column-gap: 10px;
+  }
+
+  @media (max-width: ${sizes.ipad}) {
+    display: flex;
   }
 `;

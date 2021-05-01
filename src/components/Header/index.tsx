@@ -5,7 +5,14 @@ import logo from 'assets/svgs/logo-querobolsa.svg';
 import { Menu, Divider } from 'components';
 
 // Styles
-import { Container, HeaderContainer, Info, Account } from './styles';
+import {
+  Container,
+  HeaderContainer,
+  Info,
+  InfoMobile,
+  Account,
+  AccountMobile,
+} from './styles';
 
 export const Header: React.FC = () => {
   return (
@@ -13,7 +20,7 @@ export const Header: React.FC = () => {
       <HeaderContainer>
         <Info>
           <FontAwesomeIcon icon={faInfoCircle} size="lg" />
-          <span className="desktop">Como Funciona</span>
+          <span>Como Funciona</span>
 
           <Divider />
 
@@ -23,13 +30,31 @@ export const Header: React.FC = () => {
           </div>
         </Info>
 
+        <InfoMobile>
+          <div>
+            <FontAwesomeIcon icon={faInfoCircle} size="lg" />
+            <span>Ajuda</span>
+          </div>
+
+          <Divider />
+        </InfoMobile>
+
         <img src={logo} alt="Logo Quero Bolsa" />
 
         <Account>
-          <span className="desktop">Nome Sobrenome</span>
+          <span>Nome Sobrenome</span>
           <FontAwesomeIcon icon={faUserCircle} size="lg" />
         </Account>
+
+        <AccountMobile>
+          <Divider />
+          <div>
+            <FontAwesomeIcon icon={faUserCircle} size="lg" />
+            <span>Conta</span>
+          </div>
+        </AccountMobile>
       </HeaderContainer>
+
       <Menu />
     </Container>
   );
