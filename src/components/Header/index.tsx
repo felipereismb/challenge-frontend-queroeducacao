@@ -1,3 +1,4 @@
+import { ReactComponent as Whatsapp } from 'assets/svgs/whatsapp.svg';
 import { faInfoCircle, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -24,9 +25,18 @@ export const Header: React.FC = () => {
 
           <Divider />
 
-          <div>
-            <p>0800 123 2222</p>
-            <p className="message">Envie mensagem ou ligue</p>
+          <div className="whatsapp">
+            <Whatsapp
+              fill="#64B161"
+              stroke="#64B161"
+              width="25"
+              height="auto"
+            />
+
+            <div>
+              <p>0800 123 2222</p>
+              <p className="message">Envie mensagem ou ligue</p>
+            </div>
           </div>
         </Info>
 

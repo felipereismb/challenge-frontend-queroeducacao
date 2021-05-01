@@ -120,6 +120,8 @@ export const Home: React.FC = () => {
         </CardsContainer>
       </Container>
 
+      <Components.Footer />
+
       <Components.Modal
         visibility={openModal}
         handleClose={() => setOpenModal(false)}

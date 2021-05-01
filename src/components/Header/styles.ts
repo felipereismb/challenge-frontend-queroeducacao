@@ -44,10 +44,10 @@ export const Info = styled.div`
     font-size: 12px;
   }
 
-  > div {
+  .whatsapp {
     display: flex;
-    flex-direction: column;
-    row-gap: 5px;
+    align-items: center;
+    column-gap: 5px;
   }
 
   @media (max-width: ${sizes.ipad}) {

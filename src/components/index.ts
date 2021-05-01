@@ -8,3 +8,4 @@ export * from './Dropdown';
 export * from './Slider';
 export * from './CourseItem';
 export * from './Button';
+export * from './Footer';

@@ -1,17 +1,17 @@
 import { BrowserRouter } from 'react-router-dom';
 
-import { MyThemeProvider } from 'hooks';
+import { Wrapper } from 'styles';
 import Routes from 'routes';
 import GlobalStyles from 'styles/global';
 
 const Bootstrap: React.FC = () => {
   return (
     <>
-      <MyThemeProvider>
+      <Wrapper>
         <BrowserRouter>
           <Routes />
         </BrowserRouter>
-      </MyThemeProvider>
+      </Wrapper>
       <GlobalStyles />
     </>
   );
