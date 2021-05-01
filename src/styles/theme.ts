@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const sizes = {
   headerHeight: '110px',
   desktopPadding: '80px',
-  mobilePadding: '10px',
+  mobilePadding: '20px',
   mobile: '600px',
   ipad: '900px',
   notebook: '1200px',

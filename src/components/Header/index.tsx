@@ -26,7 +26,7 @@ export const Header: React.FC = () => {
 
           <div>
             <p>0800 123 2222</p>
-            <p>Envie mensagem ou ligue</p>
+            <p className="message">Envie mensagem ou ligue</p>
           </div>
         </Info>
 

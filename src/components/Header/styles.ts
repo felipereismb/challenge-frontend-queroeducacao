@@ -21,7 +21,8 @@ export const HeaderContainer = styled.div`
   padding: 0px ${sizes.desktopPadding};
 
   font-weight: bold;
-  color: ${colors.primaryBlue};
+  font-size: 15px;
+  color: ${colors.secondaryBlue};
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
 
   img {
@@ -39,6 +40,16 @@ export const Info = styled.div`
   width: 550px;
   column-gap: 10px;
 
+  .message {
+    font-size: 12px;
+  }
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+  }
+
   @media (max-width: ${sizes.ipad}) {
     display: none;
   }
@@ -52,7 +63,7 @@ export const InfoMobile = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
-    column-gap: 10px;
+    row-gap: 5px;
   }
 
   @media (max-width: ${sizes.ipad}) {
@@ -82,7 +93,7 @@ export const AccountMobile = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
-    column-gap: 10px;
+    row-gap: 5px;
   }
 
   @media (max-width: ${sizes.ipad}) {
