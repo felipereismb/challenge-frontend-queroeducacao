@@ -9,6 +9,7 @@ interface ParamsGetScholarship {
   course?: string | number;
   city?: string | number;
   max_amount: string;
+  sort: string;
 }
 
 const sortInputs = (input: IItemDropdown[]) => {
@@ -24,6 +25,8 @@ const sortInputs = (input: IItemDropdown[]) => {
 };
 
 export const getAllCities = () => {
+  let key = 0;
+
   const cities: IItemDropdown[] = database.reduce((a: any, b: IScholarship) => {
     const i = a.findIndex((x: IItemDropdown) => x.label === b.campus.city);
 
@@ -31,9 +34,10 @@ export const getAllCities = () => {
       const item: IItemDropdown = {
         label: b.campus.city,
         value: b.campus.city,
-        key: `citie_${i}`,
+        key: `citie_${key}`,
       };
       a.push(item);
+      key += 1;
     }
     return a;
   }, []);
@@ -42,6 +46,7 @@ export const getAllCities = () => {
 };
 
 export const getAllCourses = () => {
+  let key = 0;
   const courses: IItemDropdown[] = database.reduce(
     (a: any, b: IScholarship) => {
       const i = a.findIndex((x: IItemDropdown) => x.label === b.course.name);
@@ -50,9 +55,10 @@ export const getAllCourses = () => {
         const item: IItemDropdown = {
           label: b.course.name,
           value: b.course.name,
-          key: `course_${i}`,
+          key: `course_${key}`,
         };
         a.push(item);
+        key += 1;
       }
       return a;
     },
@@ -97,7 +103,23 @@ export const getScholarship = (params: ParamsGetScholarship) => {
     filtered = [...auxDistance];
   }
 
-  // Parei aqui na filtragem
+  let sorted: IScholarship[] = [];
+  switch (params.sort) {
+    case 'name':
+      sorted = filtered.sort((a: IScholarship, b: IScholarship) => {
+        if (a.course.name < b.course.name) {
+          return -1;
+        }
+        if (a.course.name > b.course.name) {
+          return 1;
+        }
+        return 0;
+      });
+      break;
 
-  return filtered;
+    default:
+      break;
+  }
+
+  return sorted;
 };

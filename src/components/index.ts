@@ -7,3 +7,4 @@ export * from './Modal';
 export * from './Dropdown';
 export * from './Slider';
 export * from './CourseItem';
+export * from './Button';

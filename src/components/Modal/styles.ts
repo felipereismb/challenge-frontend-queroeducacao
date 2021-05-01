@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { colors } from '../../styles';
 
@@ -7,50 +7,98 @@ interface ModalProps {
 }
 
 export const Container = styled.div<ModalProps>`
-  position: absolute;
+  position: fixed;
   top: 0;
+  right: 0;
+  bottom: 0;
   left: 0;
+  z-index: 10;
+  transition: all 0.5s 0.5s ease-in-out;
+  background-color: rgb(31, 45, 48, 0.88);
 
-  width: 100%;
-  height: max-content;
+  ${({ visibility }) =>
+    visibility
+      ? css`
+          opacity: 1;
+          visibility: visible;
+          -webkit-transition-delay: 0s;
+          -ms-transition-delay: 0s;
+          transition-delay: 0s;
+        `
+      : css`
+          opacity: 0;
+          visibility: hidden;
+          -webkit-transition: all 0.5s 0.5s ease-in-out;
+        `};
 
   display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background-color: rgb(0, 0, 0, 0.85);
-
-  z-index: 1;
-
-  visibility: ${({ visibility }) => (visibility ? 'visible' : 'hidden')};
-`;
-
-export const ModalContent = styled.div`
-  display: flex;
-  align-items: flex-end;
   flex-direction: column;
+  align-items: center;
 
-  padding: 80px 0px;
+  > .modal-close {
+    position: relative;
+    max-width: 700px;
+    min-width: 360px;
+    max-height: 85%;
 
-  > button {
-    width: 50px;
-    margin-bottom: 10px;
+    width: 100%;
 
-    color: white;
-    text-align: right;
-    font-size: 25px;
+    margin-top: 10px;
 
-    border: none;
-    background-color: transparent;
+    > button {
+      position: absolute;
+      width: 50px;
+      right: 0px;
+
+      color: white;
+      text-align: right;
+      font-size: 25px;
+
+      border: none;
+      background-color: transparent;
+    }
   }
 `;
 
-export const Card = styled.div`
-  min-height: 500px;
-  width: 750px;
+export const ModalContent = styled.div<ModalProps>`
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  max-width: 700px;
+  min-width: 360px;
+  max-height: 85%;
 
-  background-color: white;
-  padding: 20px 40px;
+  width: 100%;
+
+  overflow: auto;
+  padding: 10px;
+  z-index: 2;
+  border-radius: 1px;
+  background: #fff;
+  transition: all 0.5s ease-in-out;
+
+  ${({ visibility }) =>
+    visibility
+      ? css`
+          opacity: 1;
+          -webkit-transform: translate(-50%, 0);
+          -ms-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+          -webkit-transition-delay: 0.5s;
+          -ms-transition-delay: 0.5s;
+          transition-delay: 0.5s;
+        `
+      : css`
+          opacity: 0;
+          -webkit-transform: translate(-50%, 0);
+          -ms-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+          -webkit-transition: all 0.5s ease-in-out;
+        `};
+`;
+
+export const Card = styled.div`
+  padding: 20px 30px;
 
   span {
     font-size: 11px;
@@ -101,6 +149,13 @@ export const Card = styled.div`
     justify-content: space-between;
 
     margin-top: 20px;
+    margin-bottom: 40px;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    column-gap: 10px;
   }
 `;
 

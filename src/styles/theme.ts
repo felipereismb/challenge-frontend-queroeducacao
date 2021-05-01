@@ -32,4 +32,8 @@ export const Wrapper = styled.div`
   .primaryBlue {
     color: ${colors.primaryBlue};
   }
+
+  .green {
+    color: ${colors.green};
+  }
 `;

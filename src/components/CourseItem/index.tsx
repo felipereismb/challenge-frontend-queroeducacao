@@ -4,7 +4,7 @@ import IScholarship from 'models/IScholarship';
 
 interface Props {
   scholarship: IScholarship;
-  onChange: (checked: boolean) => void;
+  onChange: () => void;
   checked: boolean;
 }
 
@@ -20,7 +20,7 @@ export const CourseItem: React.FC<Props> = ({
         <div>
           <input
             type="checkbox"
-            onChange={() => onChange(!checked)}
+            onChange={() => onChange()}
             checked={checked}
           />
 

@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Components
 import * as Components from '../../components';
+
+// Model
+import IScholarship from 'models/IScholarship';
 
 // Styles
 import { Container, Path, Semesters, CardsContainer } from './styles';
@@ -9,6 +12,39 @@ import { Container, Path, Semesters, CardsContainer } from './styles';
 export const Home: React.FC = () => {
   const [selectedSemester, setSelectedSemester] = useState('all');
   const [openModal, setOpenModal] = useState(false);
+  const [scholarships, setScholarships] = useState<IScholarship[]>([]);
+  const [triggerRemove, setTriggerRemove] = useState(false);
+
+  useEffect(() => {
+    const itens = localStorage.getItem('selectedScholarship');
+    if (itens) {
+      const aux = JSON.parse(itens);
+      if (selectedSemester !== 'all') {
+        const filtered = aux.filter(
+          (item: IScholarship) => item.enrollment_semester === selectedSemester,
+        );
+        setScholarships(filtered);
+      } else {
+        setScholarships(aux);
+      }
+    }
+  }, [openModal, triggerRemove, selectedSemester]);
+
+  const removeScholarship = (scholarship: IScholarship) => {
+    const itens = localStorage.getItem('selectedScholarship');
+    if (itens) {
+      const aux = JSON.parse(itens);
+      for (let index = 0; index < aux.length; index++) {
+        const element = aux[index];
+        if (JSON.stringify(element) === JSON.stringify(scholarship)) {
+          aux.splice(index, 1);
+          localStorage.setItem('selectedScholarship', JSON.stringify(aux));
+          setTriggerRemove(!triggerRemove);
+          break;
+        }
+      }
+    }
+  };
 
   return (
     <>
@@ -55,6 +91,14 @@ export const Home: React.FC = () => {
 
         <CardsContainer>
           <Components.AddCourseCard onClick={() => setOpenModal(!openModal)} />
+
+          {scholarships.map((scholarship, index) => (
+            <Components.CourseCard
+              key={`courseCard_scholarship_${index}`}
+              scholarship={scholarship}
+              onRemoveItem={() => removeScholarship(scholarship)}
+            />
+          ))}
         </CardsContainer>
       </Container>
 

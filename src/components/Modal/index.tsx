@@ -18,6 +18,7 @@ export const Modal: React.FC<Props> = ({ handleClose, visibility }) => {
   const [filteredScholarship, setFilteredScholarship] = useState<
     IScholarship[]
   >([]);
+  const [sort, setSort] = useState<string>('name');
   const [valueCanPay, setValueCanPay] = useState<string>('10000');
   const [checkedPresential, setCheckedPresential] = useState<boolean>(false);
   const [checkedDistance, setCheckedDistance] = useState<boolean>(false);
@@ -27,9 +28,7 @@ export const Modal: React.FC<Props> = ({ handleClose, visibility }) => {
   const [selectedCourse, setSelectedCourse] = useState<IItemDropdown>(() => {
     return {} as IItemDropdown;
   });
-  const [selectedScholarship, setSelectedScholarship] = useState<
-    IScholarship[]
-  >([]);
+  const [selectedScholarship, setSelectedScholarship] = useState<number[]>([]);
 
   useEffect(() => {
     const params = {
@@ -38,8 +37,10 @@ export const Modal: React.FC<Props> = ({ handleClose, visibility }) => {
       course: selectedCourse.value,
       city: selectedCitie.value,
       max_amount: valueCanPay,
+      sort: sort,
     };
     const scholarship = getScholarship(params);
+    setSelectedScholarship([]);
     setFilteredScholarship(scholarship);
   }, [
     valueCanPay,
@@ -49,33 +50,51 @@ export const Modal: React.FC<Props> = ({ handleClose, visibility }) => {
     selectedCitie,
   ]);
 
-  const handleChangeSelectedCourses = useCallback(
-    (checked: boolean, scholarship: IScholarship) => {
-      const aux = [...selectedScholarship];
-      console.log('checked');
-      console.log(checked);
-      console.log('aux');
-      console.log(aux);
-
-      if (checked) {
-        aux.push(scholarship);
-      } else {
-        const i = aux.indexOf(scholarship);
+  const handleChangeSelectedCourses = useCallback((index: number) => {
+    setSelectedScholarship(prevState => {
+      const aux = [...prevState];
+      const i = prevState.indexOf(index);
+      if (i !== -1) {
         aux.splice(i, 1);
+      } else {
+        aux.push(index);
       }
-      console.log('novo aux');
-      console.log(aux);
-      setSelectedScholarship(aux);
-    },
-    [],
-  );
+      return aux;
+    });
+  }, []);
+
+  const onClickClose = () => {
+    const aux = {} as IItemDropdown;
+    setValueCanPay('10000');
+    setCheckedPresential(false);
+    setCheckedDistance(false);
+    setSelectedCitie(aux);
+    setSelectedCourse(aux);
+    handleClose();
+  };
+
+  const addScholarships = () => {
+    let aux: IScholarship[] = [];
+    const itens = localStorage.getItem('selectedScholarship');
+    if (itens) {
+      aux = JSON.parse(itens);
+    }
+    selectedScholarship.forEach(index => {
+      aux.push(filteredScholarship[index]);
+    });
+
+    localStorage.setItem('selectedScholarship', JSON.stringify(aux));
+    onClickClose();
+  };
 
   return (
     <Container visibility={visibility}>
-      <ModalContent>
-        <button type="button" onClick={handleClose}>
+      <div className="modal-close">
+        <button type="button" onClick={onClickClose}>
           X
         </button>
+      </div>
+      <ModalContent visibility={visibility}>
         <Card>
           <h1>Adicionar Bolsa</h1>
           <p>Filtre e adicione as bolsas do seu interesse</p>
@@ -106,7 +125,7 @@ export const Modal: React.FC<Props> = ({ handleClose, visibility }) => {
                   <input
                     type="checkbox"
                     checked={checkedPresential}
-                    onClick={() => setCheckedPresential(!checkedPresential)}
+                    onChange={() => setCheckedPresential(!checkedPresential)}
                   />
                   <span>Presencial</span>
                 </div>
@@ -114,7 +133,7 @@ export const Modal: React.FC<Props> = ({ handleClose, visibility }) => {
                   <input
                     type="checkbox"
                     checked={checkedDistance}
-                    onClick={() => setCheckedDistance(!checkedDistance)}
+                    onChange={() => setCheckedDistance(!checkedDistance)}
                   />
                   <span>A Distáncia</span>
                 </div>
@@ -142,7 +161,8 @@ export const Modal: React.FC<Props> = ({ handleClose, visibility }) => {
           <div className="result">
             <span>Resultado:</span>
             <span>
-              Ordenar por <span className="primaryBlue">Nome da Faculdade</span>
+              Ordenado por{' '}
+              <span className="primaryBlue">Nome da Faculdade</span>
             </span>
           </div>
 
@@ -151,13 +171,24 @@ export const Modal: React.FC<Props> = ({ handleClose, visibility }) => {
               <Components.CourseItem
                 key={`courseList_${i}`}
                 scholarship={scholarship}
-                onChange={(checked: boolean) =>
-                  handleChangeSelectedCourses(checked, scholarship)
-                }
-                checked={selectedScholarship.includes(scholarship)}
+                onChange={() => handleChangeSelectedCourses(i)}
+                checked={selectedScholarship.includes(i)}
               />
             ))}
           </Courses>
+
+          <div className="buttons">
+            <Components.Button onClick={onClickClose}>
+              Cancelar
+            </Components.Button>
+            <Components.Button
+              variant="secondary"
+              onClick={addScholarships}
+              disabled={selectedScholarship.length === 0}
+            >
+              Adicionar Bolsa(s)
+            </Components.Button>
+          </div>
         </Card>
       </ModalContent>
     </Container>
