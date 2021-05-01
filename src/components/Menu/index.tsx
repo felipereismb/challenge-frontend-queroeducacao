@@ -7,18 +7,21 @@ export const Menu: React.FC = () => {
   return (
     <Container>
       <Item
+        data-testid="minha-conta"
         selected={selected === 'minha-conta'}
         onClick={() => setSelected('minha-conta')}
       >
         Minha Conta
       </Item>
       <Item
+        data-testid="pre-matriculas"
         selected={selected === 'pre-matriculas'}
         onClick={() => setSelected('pre-matriculas')}
       >
         Pré-matrículas
       </Item>
       <Item
+        data-testid="bolsas-favoritas"
         selected={selected === 'bolsas-favoritas'}
         onClick={() => setSelected('bolsas-favoritas')}
       >

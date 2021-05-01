@@ -90,7 +90,11 @@ export const Modal: React.FC<Props> = ({ handleClose, visibility }) => {
   return (
     <Container visibility={visibility}>
       <div className="modal-close">
-        <button type="button" onClick={onClickClose}>
+        <button
+          data-testid="button-close-modal"
+          type="button"
+          onClick={onClickClose}
+        >
           X
         </button>
       </div>
@@ -123,6 +127,7 @@ export const Modal: React.FC<Props> = ({ handleClose, visibility }) => {
               <div>
                 <div className="checkbox">
                   <input
+                    data-testid="checkedPresential"
                     type="checkbox"
                     checked={checkedPresential}
                     onChange={() => setCheckedPresential(!checkedPresential)}
@@ -132,6 +137,7 @@ export const Modal: React.FC<Props> = ({ handleClose, visibility }) => {
                 <div className="checkbox">
                   <input
                     type="checkbox"
+                    data-testid="checkedDistance"
                     checked={checkedDistance}
                     onChange={() => setCheckedDistance(!checkedDistance)}
                   />
@@ -182,6 +188,7 @@ export const Modal: React.FC<Props> = ({ handleClose, visibility }) => {
               Cancelar
             </Components.Button>
             <Components.Button
+              data-testid="button-add-scholarships"
               variant="secondary"
               onClick={addScholarships}
               disabled={selectedScholarship.length === 0}

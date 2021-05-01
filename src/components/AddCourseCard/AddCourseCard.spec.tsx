@@ -1,10 +1,21 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
-import { CourseCard } from './index';
+import { AddCourseCard } from './index';
 
-describe('<CourseCard />', () => {
+describe('<AddCourseCard />', () => {
   it('should render', () => {
-    const component = render(<CourseCard />);
+    const component = render(<AddCourseCard onClick={jest.fn()} />);
     expect(component).toBeTruthy();
+  });
+
+  test('Error rendering with property CARD TRUE', () => {
+    const { getByText } = render(<AddCourseCard onClick={jest.fn()} />);
+
+    const appliedFeeElement = getByText('Adicionar curso');
+
+    // Mouse Hover
+    fireEvent.mouseEnter(appliedFeeElement);
+    // Mouse Out
+    fireEvent.mouseLeave(appliedFeeElement);
   });
 });

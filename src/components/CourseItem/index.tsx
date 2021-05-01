@@ -19,6 +19,7 @@ export const CourseItem: React.FC<Props> = ({
       <Container>
         <div>
           <input
+            data-testid={`checkbox-courseitem-${scholarship.university.logo_url}`}
             type="checkbox"
             onChange={() => onChange()}
             checked={checked}

@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import { CourseItem } from './index';
 
@@ -26,9 +26,27 @@ const mock = {
   },
 };
 
+const mockOnChange = jest.fn();
+
 describe('<CourseItem />', () => {
   it('should render', () => {
-    const component = render(<CourseItem scholarship={mock} />);
+    const component = render(
+      <CourseItem scholarship={mock} onChange={mockOnChange} checked />,
+    );
     expect(component).toBeTruthy();
+  });
+
+  it('should render', () => {
+    const { getByTestId } = render(
+      <CourseItem scholarship={mock} onChange={mockOnChange} checked />,
+    );
+
+    const checkboxElement = getByTestId(
+      `checkbox-courseitem-${mock.university.logo_url}`,
+    );
+
+    fireEvent.click(checkboxElement);
+
+    expect(mockOnChange).toHaveBeenCalledTimes(1);
   });
 });

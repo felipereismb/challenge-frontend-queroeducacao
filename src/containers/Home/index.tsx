@@ -67,6 +67,7 @@ export const Home: React.FC = () => {
 
         <Semesters>
           <button
+            data-testid="button-all"
             className={`${selectedSemester === 'all' && 'selected'}`}
             onClick={() => setSelectedSemester('all')}
             type="button"
@@ -74,6 +75,7 @@ export const Home: React.FC = () => {
             Todos os semestres
           </button>
           <button
+            data-testid="button-2019.2"
             className={`${selectedSemester === '2019.2' && 'selected'}`}
             onClick={() => setSelectedSemester('2019.2')}
             type="button"
@@ -81,6 +83,7 @@ export const Home: React.FC = () => {
             2º semestre de 2019
           </button>
           <button
+            data-testid="button-2020.1"
             className={`${selectedSemester === '2020.1' && 'selected'}`}
             onClick={() => setSelectedSemester('2020.1')}
             type="button"

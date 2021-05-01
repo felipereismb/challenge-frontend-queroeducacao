@@ -10,6 +10,7 @@ interface Props {
 export const Slider: React.FC<Props> = ({ min, max, onChange, value }) => {
   return (
     <Container
+      data-testid="slider"
       min={min}
       max={max}
       type="range"
