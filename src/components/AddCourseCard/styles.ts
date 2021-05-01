@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { colors } from '../../styles';
+import { colors, sizes } from 'styles';
 
 export const Container = styled.div`
   display: flex;
@@ -37,4 +37,13 @@ export const Container = styled.div`
   }
 
   cursor: pointer;
+
+  @media (max-width: ${sizes.mobile}) {
+    width: 100%;
+    height: 200px;
+
+    > :first-child {
+      bottom: 40px;
+    }
+  }
 `;

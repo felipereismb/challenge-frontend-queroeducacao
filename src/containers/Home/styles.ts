@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { sizes, colors } from '../../styles';
+import { sizes, colors } from 'styles';
 
 export const Container = styled.div`
   width: 100%;
@@ -17,11 +17,14 @@ export const Container = styled.div`
   p {
     margin-top: 10px;
   }
+
+  @media (max-width: ${sizes.mobile}) {
+    padding: ${sizes.headerHeight} ${sizes.mobilePadding};
+  }
 `;
 
 export const Path = styled.div`
   display: flex;
-  column-gap: 10px;
   padding-top: 25px;
 
   color: ${colors.primaryBlue};
@@ -32,6 +35,25 @@ export const Path = styled.div`
 
     + .selected {
       color: ${colors.blackText};
+    }
+  }
+
+  .desktop {
+    display: flex;
+    column-gap: 10px;
+
+    @media (max-width: ${sizes.mobile}) {
+      display: none;
+    }
+  }
+
+  .mobile {
+    display: none;
+
+    @media (max-width: ${sizes.mobile}) {
+      display: flex;
+      align-items: center;
+      column-gap: 10px;
     }
   }
 `;
@@ -87,6 +109,40 @@ export const Semesters = styled.div`
       background-color: ${colors.secondaryBlue};
     }
   }
+
+  @media (max-width: ${sizes.mobile}) {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    width: 100%;
+
+    button {
+      padding: 15px 20px;
+
+      :first-child {
+        border-width: 0.1px;
+        border-style: solid;
+        border-color: ${colors.secondaryBlue};
+
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+      }
+
+      :last-child {
+        border-width: 0.1px;
+        border-style: solid;
+        border-color: ${colors.secondaryBlue};
+
+        border-top-right-radius: 0px;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+      }
+    }
+  }
 `;
 
 export const CardsContainer = styled.div`
@@ -95,4 +151,9 @@ export const CardsContainer = styled.div`
 
   column-gap: 30px;
   row-gap: 40px;
+
+  @media (max-width: ${sizes.mobile}) {
+    flex-direction: column;
+    column-gap: 0px;
+  }
 `;

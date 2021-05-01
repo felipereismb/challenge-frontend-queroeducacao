@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { colors } from 'styles';
+import { colors, sizes } from 'styles';
 
 export const Container = styled.div`
   position: relative;
@@ -62,6 +62,10 @@ export const Container = styled.div`
     margin-top: 20px;
 
     bottom: 20px;
+  }
+
+  @media (max-width: ${sizes.mobile}) {
+    width: 100%;
   }
 `;
 

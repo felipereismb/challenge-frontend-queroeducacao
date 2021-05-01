@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
 
+// Icons
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 // Components
 import * as Components from '../../components';
 
@@ -52,11 +56,22 @@ export const Home: React.FC = () => {
 
       <Container>
         <Path>
-          <span>Home</span>
-          <span>/</span>
-          <span>Minha conta</span>
-          <span className="selected">/</span>
-          <span className="selected">Bolsas favoritas</span>
+          <div className="mobile">
+            <FontAwesomeIcon
+              icon={faChevronDown}
+              transform={{ rotate: 90 }}
+              size="xs"
+            />
+            <span>Bolsas favoritas</span>
+          </div>
+
+          <div className="desktop">
+            <span>Home</span>
+            <span>/</span>
+            <span>Minha conta</span>
+            <span className="selected">/</span>
+            <span className="selected">Bolsas favoritas</span>
+          </div>
         </Path>
 
         <h1>Bolsas Favoritas</h1>
