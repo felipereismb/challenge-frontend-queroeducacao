@@ -1,7 +1,7 @@
 {
   "name": "front-end-test-quero",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.1.0",
+  "private": false,
   "scripts": {
     "start": "react-scripts start",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
@@ -58,6 +58,7 @@
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-security": "^1.4.0",
+    "husky": "^6.0.0",
     "jest-canvas-mock": "^2.3.1",
     "jest-styled-components": "^7.0.4",
     "lint-staged": "^10.5.4",
