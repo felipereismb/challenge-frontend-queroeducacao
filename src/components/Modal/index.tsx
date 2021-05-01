@@ -188,7 +188,11 @@ export const Modal: React.FC<Props> = ({ handleClose, visibility }) => {
             <span>Resultado:</span>
             <div ref={wrapperRef}>
               Ordenar por{' '}
-              <p className="primaryBlue" onClick={() => setSortOpen(!sortOpen)}>
+              <p
+                data-testid="wrapperSort"
+                className="primaryBlue"
+                onClick={() => setSortOpen(!sortOpen)}
+              >
                 {sort === 'name' && 'Nome da Faculdade'}
                 {sort === 'start-date' && 'Data de Início'}
                 <FontAwesomeIcon
@@ -199,6 +203,7 @@ export const Modal: React.FC<Props> = ({ handleClose, visibility }) => {
               {sortOpen && (
                 <div className="wrapperSort">
                   <p
+                    data-testid="optionSortName"
                     onClick={() => {
                       setSortOpen(!sortOpen);
                       setSort('name');
@@ -207,6 +212,7 @@ export const Modal: React.FC<Props> = ({ handleClose, visibility }) => {
                     Nome da Faculdade
                   </p>
                   <p
+                    data-testid="optionSortStartDate"
                     onClick={() => {
                       setSortOpen(!sortOpen);
                       setSort('start-date');

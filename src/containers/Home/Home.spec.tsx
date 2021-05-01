@@ -52,17 +52,12 @@ const mock2 = {
 
 describe('<HomeContainer />', () => {
   it('render with localStorage', () => {
+    jest
+      .spyOn(Storage.prototype, 'getItem')
+      .mockReturnValue(JSON.stringify([mock, mock2]));
+
     const component = render(<Home />);
 
-    /* Resgate do localstorage */
-    jest.spyOn(Storage.prototype, 'getItem').mockImplementation(key => {
-      switch (key) {
-        case 'selectedScholarship':
-          return JSON.stringify([mock, mock2]);
-        default:
-          return null;
-      }
-    });
     expect(component).toBeTruthy();
   });
 
@@ -96,10 +91,35 @@ describe('<HomeContainer />', () => {
     fireEvent.click(cardElement);
   });
 
-  // it('click delete item ', () => {
-  //   const { getAllByTestId } = render(<Home />);
+  it('Open Modal and close modal', () => {
+    const { getByTestId, getByText } = render(<Home />);
 
-  //   const buttonElement = getAllByTestId('button-delete');
-  //   fireEvent.click(buttonElement[0]);
-  // });
+    const cardElement = getByTestId('CardAddCourse');
+    fireEvent.click(cardElement);
+
+    const buttonCloseModalElement = getByText('X');
+    fireEvent.click(buttonCloseModalElement);
+  });
+
+  it('render with localStorage and click menu button-2020.1', () => {
+    jest
+      .spyOn(Storage.prototype, 'getItem')
+      .mockReturnValue(JSON.stringify([mock, mock2]));
+
+    const { getByTestId } = render(<Home />);
+
+    const buttonElement = getByTestId('button-2020.1');
+    fireEvent.click(buttonElement);
+  });
+
+  it('click delete item ', () => {
+    jest
+      .spyOn(Storage.prototype, 'getItem')
+      .mockReturnValue(JSON.stringify([mock, mock2]));
+
+    const { getAllByText } = render(<Home />);
+
+    const buttonElement = getAllByText('Excluir');
+    fireEvent.click(buttonElement[0]);
+  });
 });

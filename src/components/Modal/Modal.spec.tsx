@@ -1,7 +1,5 @@
-import { fireEvent, waitFor, render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import TestRenderer from 'react-test-renderer';
-
-const { act } = TestRenderer;
 
 import { Modal } from './index';
 
@@ -73,26 +71,21 @@ describe('<Modal />', () => {
   });
 
   it('Add scholarships with localStorage', () => {
+    /* Resgate do localstorage */
+    jest
+      .spyOn(Storage.prototype, 'getItem')
+      .mockReturnValue(JSON.stringify([mock]));
+
     const { getByTestId, getAllByTestId } = render(
       <Modal handleClose={jest.fn} visibility />,
     );
-
-    /* Resgate do localstorage */
-    jest.spyOn(Storage.prototype, 'getItem').mockImplementation(key => {
-      switch (key) {
-        case 'selectedScholarship':
-          return JSON.stringify([mock]);
-        default:
-          return null;
-      }
-    });
 
     const checkboxElement = getAllByTestId(
       `checkbox-courseitem-https://www.tryimg.com/u/2019/04/16/etep.png`,
     );
     const firstCheck = checkboxElement[0] as HTMLInputElement;
     fireEvent.click(firstCheck);
-    fireEvent.click(firstCheck);
+    // fireEvent.click(firstCheck);
 
     const buttonElement = getByTestId('button-add-scholarships');
     fireEvent.click(buttonElement);
@@ -135,5 +128,31 @@ describe('<Modal />', () => {
 
     const itemElement = getAllByText('Jacareí');
     fireEvent.click(itemElement[0]);
+  });
+
+  it('Open wrapperSort', () => {
+    const { getByTestId } = render(<Modal handleClose={jest.fn} visibility />);
+
+    const itemElement = getByTestId('wrapperSort');
+    fireEvent.click(itemElement);
+  });
+
+  it('Open wrapperSort and click start-date option', () => {
+    const { getByTestId } = render(<Modal handleClose={jest.fn} visibility />);
+
+    const itemElement = getByTestId('wrapperSort');
+    fireEvent.click(itemElement);
+    const startDateElement = getByTestId('optionSortStartDate');
+    fireEvent.click(startDateElement);
+  });
+
+  it('Open wrapperSort and click name option', () => {
+    const { getByTestId } = render(<Modal handleClose={jest.fn} visibility />);
+
+    const itemElement = getByTestId('wrapperSort');
+    fireEvent.click(itemElement);
+
+    const startDateElement = getByTestId('optionSortName');
+    fireEvent.click(startDateElement);
   });
 });

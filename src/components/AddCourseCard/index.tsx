@@ -13,6 +13,7 @@ export const AddCourseCard: React.FC<Props> = ({ onClick }) => {
 
   return (
     <Container
+      data-testid="CardAddCourse"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       onClick={onClick}

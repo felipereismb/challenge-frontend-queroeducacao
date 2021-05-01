@@ -32,6 +32,7 @@ export const Menu: React.FC = () => {
         </p>
 
         <div
+          data-testid="mobile-menu"
           ref={wrapperRef}
           onClick={() => setOpenMobileMenu(!openMobileMenu)}
         >

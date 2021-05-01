@@ -2,5 +2,6 @@
 . "$(dirname "$0")/_/husky.sh"
 
 npx --no-install lint-staged
-yarn lint-stagednpm test
+yarn lint-staged 
+npm test
 npm lint

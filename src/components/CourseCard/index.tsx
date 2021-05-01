@@ -66,11 +66,7 @@ export const CourseCard: React.FC<Props> = ({ scholarship, onRemoveItem }) => {
       )}
 
       <div className="buttons">
-        <Components.Button
-          data-testid="button-delete"
-          size="SM"
-          onClick={onRemoveItem}
-        >
+        <Components.Button size="SM" onClick={onRemoveItem}>
           Excluir
         </Components.Button>
         <Components.Button

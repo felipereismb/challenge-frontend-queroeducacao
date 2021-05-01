@@ -28,4 +28,22 @@ describe('<Menu />', () => {
     const menuItem = getByTestId('minha-conta');
     fireEvent.click(menuItem);
   });
+
+  it('open mobile menu and click itens', () => {
+    const { getByTestId } = render(<Menu />);
+
+    const menuWrapper = getByTestId('mobile-menu');
+    fireEvent.click(menuWrapper);
+
+    let menuItem = getByTestId('item-minha-conta');
+    fireEvent.click(menuItem);
+
+    fireEvent.click(menuWrapper);
+    menuItem = getByTestId('item-pre-matriculas');
+    fireEvent.click(menuItem);
+
+    fireEvent.click(menuWrapper);
+    menuItem = getByTestId('item-bolsas-favoritas');
+    fireEvent.click(menuItem);
+  });
 });
