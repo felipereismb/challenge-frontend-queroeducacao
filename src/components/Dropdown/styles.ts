@@ -9,7 +9,7 @@ interface ContainerOptionsProps {
 export const Container = styled.div`
   position: relative;
   width: 100%;
-
+  margin-top: 20px;
   > span {
     font-size: 11px;
     color: ${colors.blackText};

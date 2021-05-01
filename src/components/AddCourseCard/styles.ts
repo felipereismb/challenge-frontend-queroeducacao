@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { colors, sizes } from 'styles';
 
 export const Container = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,7 +25,7 @@ export const Container = styled.div`
 
   > :first-child {
     position: absolute;
-    bottom: 80px;
+    top: 30%;
   }
 
   .icon {
@@ -43,7 +44,7 @@ export const Container = styled.div`
     height: 200px;
 
     > :first-child {
-      bottom: 40px;
+      top: 5%;
     }
   }
 `;

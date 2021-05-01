@@ -1,13 +1,26 @@
-import { useState, useEffect } from 'react';
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import { useState, useEffect, useCallback, useRef } from 'react';
 
+// Components
 import * as Components from 'components';
+
+// Icons
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+// Models
 import IItemDropdown from 'components/Dropdown/IItemDropdown';
 import IScholarship from 'models/IScholarship';
 
+// Utils
+import { handleClickOutside } from 'utils/handleClickOutside';
+
+// Services
 import { getAllCities, getAllCourses, getScholarship } from 'services';
 
+// Styles
 import { Container, Card, ModalContent, Courses } from './styles';
-import { useCallback } from 'react';
 
 interface Props {
   handleClose: () => void;
@@ -19,6 +32,7 @@ export const Modal: React.FC<Props> = ({ handleClose, visibility }) => {
     IScholarship[]
   >([]);
   const [sort, setSort] = useState<string>('name');
+  const [sortOpen, setSortOpen] = useState(false);
   const [valueCanPay, setValueCanPay] = useState<string>('10000');
   const [checkedPresential, setCheckedPresential] = useState<boolean>(false);
   const [checkedDistance, setCheckedDistance] = useState<boolean>(false);
@@ -29,6 +43,11 @@ export const Modal: React.FC<Props> = ({ handleClose, visibility }) => {
     return {} as IItemDropdown;
   });
   const [selectedScholarship, setSelectedScholarship] = useState<number[]>([]);
+
+  const wrapperRef = useRef(document.createElement('div'));
+  useEffect(() => {
+    handleClickOutside(wrapperRef, setSortOpen);
+  }, [wrapperRef]);
 
   useEffect(() => {
     const params = {
@@ -48,6 +67,7 @@ export const Modal: React.FC<Props> = ({ handleClose, visibility }) => {
     checkedPresential,
     selectedCourse,
     selectedCitie,
+    sort,
   ]);
 
   const handleChangeSelectedCourses = useCallback((index: number) => {
@@ -141,7 +161,7 @@ export const Modal: React.FC<Props> = ({ handleClose, visibility }) => {
                     checked={checkedDistance}
                     onChange={() => setCheckedDistance(!checkedDistance)}
                   />
-                  <span>A Distáncia</span>
+                  <span>A Distância</span>
                 </div>
               </div>
             </div>
@@ -166,10 +186,37 @@ export const Modal: React.FC<Props> = ({ handleClose, visibility }) => {
 
           <div className="result">
             <span>Resultado:</span>
-            <span>
-              Ordenado por{' '}
-              <span className="primaryBlue">Nome da Faculdade</span>
-            </span>
+            <div ref={wrapperRef}>
+              Ordenar por{' '}
+              <p className="primaryBlue" onClick={() => setSortOpen(!sortOpen)}>
+                {sort === 'name' && 'Nome da Faculdade'}
+                {sort === 'start-date' && 'Data de Início'}
+                <FontAwesomeIcon
+                  icon={faChevronDown}
+                  transform={{ rotate: sortOpen ? 180 : 360 }}
+                />
+              </p>
+              {sortOpen && (
+                <div className="wrapperSort">
+                  <p
+                    onClick={() => {
+                      setSortOpen(!sortOpen);
+                      setSort('name');
+                    }}
+                  >
+                    Nome da Faculdade
+                  </p>
+                  <p
+                    onClick={() => {
+                      setSortOpen(!sortOpen);
+                      setSort('start-date');
+                    }}
+                  >
+                    Data de Início
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
 
           <Courses>

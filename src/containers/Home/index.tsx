@@ -5,7 +5,7 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Components
-import * as Components from '../../components';
+import * as Components from 'components';
 
 // Model
 import IScholarship from 'models/IScholarship';

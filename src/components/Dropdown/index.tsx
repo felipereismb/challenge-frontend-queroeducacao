@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-// import seeMoreLarge from '../../../assets/icons/seeMore_large.svg';
-import IItemDropdown from './IItemDropdown';
+// Icons
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-// Utils
+// Utils and Models
+import IItemDropdown from './IItemDropdown';
 import { handleClickOutside } from 'utils/handleClickOutside';
 
 import {
@@ -59,7 +61,10 @@ export const Dropdown: React.FC<IDropdownProps> = ({
               )}
             </div>
 
-            {/* <img src={seeMoreLarge} alt="See more icon" /> */}
+            <FontAwesomeIcon
+              icon={faChevronDown}
+              transform={{ rotate: selectOpen ? 180 : 360 }}
+            />
           </FilterDescription>
 
           <Select isOpen={selectOpen}>

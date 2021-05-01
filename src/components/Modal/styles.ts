@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { colors } from '../../styles';
+import { colors, sizes } from 'styles';
 
 interface ModalProps {
   visibility: boolean;
@@ -56,6 +56,9 @@ export const Container = styled.div<ModalProps>`
 
       border: none;
       background-color: transparent;
+      @media (max-width: ${sizes.ipad}) {
+        right: 10px;
+      }
     }
   }
 `;
@@ -109,8 +112,6 @@ export const Card = styled.div`
   .dropdowns {
     display: flex;
     column-gap: 20px;
-
-    margin-top: 40px;
   }
 
   .wrapper {
@@ -149,13 +150,68 @@ export const Card = styled.div`
     justify-content: space-between;
 
     margin-top: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
+
+    div {
+      position: relative;
+      display: flex;
+      font-size: 11px;
+      color: ${colors.blackText};
+      column-gap: 10px;
+      font-weight: bold;
+
+      .wrapperSort {
+        position: absolute;
+        top: 15px;
+        right: 0;
+        z-index: 2;
+
+        flex-direction: column;
+
+        width: 150px;
+
+        background-color: white;
+        border-radius: 5px;
+        border: 1px solid ${colors.secondaryBlue};
+
+        p {
+          padding: 10px 20px;
+        }
+        p:active {
+          padding: 10px 20px;
+          background-color: ${colors.backgroundDivider};
+        }
+      }
+
+      @media (max-width: ${sizes.mobile}) {
+        text-align: end;
+        flex-direction: column;
+        row-gap: 5px;
+      }
+    }
+
+    p {
+      display: flex;
+      column-gap: 10px;
+    }
   }
 
   .buttons {
     display: flex;
     justify-content: flex-end;
     column-gap: 10px;
+  }
+
+  @media (max-width: ${sizes.mobile}) {
+    .dropdowns {
+      flex-direction: column;
+    }
+    .wrapper {
+      flex-direction: column;
+      .howMuch {
+        margin-top: 20px;
+      }
+    }
   }
 `;
 

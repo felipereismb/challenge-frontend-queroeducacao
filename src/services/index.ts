@@ -117,6 +117,18 @@ export const getScholarship = (params: ParamsGetScholarship) => {
       });
       break;
 
+    case 'start-date':
+      sorted = filtered.sort((a: IScholarship, b: IScholarship) => {
+        if (new Date(a.start_date) < new Date(b.start_date)) {
+          return -1;
+        }
+        if (new Date(a.start_date) > new Date(b.start_date)) {
+          return 1;
+        }
+        return 0;
+      });
+      break;
+
     default:
       break;
   }

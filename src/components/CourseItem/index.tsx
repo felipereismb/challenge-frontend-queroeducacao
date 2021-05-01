@@ -29,28 +29,29 @@ export const CourseItem: React.FC<Props> = ({
             src={scholarship.university.logo_url}
             alt={`Logo universidade ${scholarship.university.name}`}
           />
-
-          <div>
-            <p>{scholarship.course.name}</p>
-            <p>{scholarship.course.level}</p>
-          </div>
         </div>
 
-        <div className="scholarship">
-          <p>
-            Bolsa de{' '}
-            <span>
-              {scholarship.discount_percentage.toLocaleString('pt-br')}%
-            </span>
-          </p>
-          <p className="currency">
-            {scholarship.price_with_discount.toLocaleString('pt-br', {
-              style: 'currency',
-              currency: 'BRL',
-              maximumFractionDigits: 2,
-            })}
-            /mês
-          </p>
+        <div className="university">
+          <div>
+            <p className="secondaryBlue">{scholarship.course.name}</p>
+            <p>{scholarship.course.level}</p>
+          </div>
+          <div className="scholarship">
+            <p>
+              Bolsa de{' '}
+              <span>
+                {scholarship.discount_percentage.toLocaleString('pt-br')}%
+              </span>
+            </p>
+            <p className="currency">
+              {scholarship.price_with_discount.toLocaleString('pt-br', {
+                style: 'currency',
+                currency: 'BRL',
+                maximumFractionDigits: 2,
+              })}
+              /mês
+            </p>
+          </div>
         </div>
       </Container>
     </>

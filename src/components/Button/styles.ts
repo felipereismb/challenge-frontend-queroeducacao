@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { colors } from '../../styles';
+import { colors } from 'styles';
 
 interface ButtonProps {
   variant?: 'prymary' | 'secondary';

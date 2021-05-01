@@ -1,23 +1,35 @@
 import styled from 'styled-components';
 
-import { colors } from '../../styles';
+import { colors, sizes } from 'styles';
 
 export const Container = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
 
   margin: 20px 3px;
 
   > div {
     display: flex;
     align-items: center;
+    margin-right: 20px;
     column-gap: 30px;
   }
 
-  > .scholarship {
+  .university {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+
+    .secondaryBlue {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+  }
+
+  .scholarship {
+    display: flex;
     flex-direction: column;
     row-gap: 5px;
 
@@ -36,6 +48,21 @@ export const Container = styled.div`
   }
 
   img {
-    width: 100px;
+    /* height: 30px; */
+    width: 80px;
+  }
+
+  @media (max-width: ${sizes.mobile}) {
+    column-gap: 40px;
+
+    .university {
+      flex-direction: column;
+      align-items: baseline;
+      row-gap: 20px;
+    }
+
+    .scholarship {
+      text-align: left;
+    }
   }
 `;
